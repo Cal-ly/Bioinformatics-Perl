@@ -1,0 +1,14 @@
+\section*{Project description}
+
+\subsection*{Description}
+Mine NCBI databases for networks of human genes which are connected by the fact that they have been mentioned in the same PubMed article. This project is a good example of how research can be done in Real Life and contains a high degree of freedom in how you want to proceed. Part of the problem is to understand and subsequently parse the NCBI databases, which are flat files. The information found could use used for pathway analysis and construction, disease gene finding and many other purposes, where the underlying problem is to find connections between (novel) genes.
+
+\subsection*{Input and output}
+The databases can be found at ftp://ftp.ncbi.nih.gov/gene/DATA/. They can be given to the program in any way you think is sensible. You can also preprocess the databases if you wish. The files of interest are gene2pubmed.gz, gene\_info.gz and README. README simply describes the files in the directory.
+The output should be the important networks of genes, displayed in such a way that it is clear, why the network is important, which genes are part of the network and how strongly they are connected. It should be possible to generate a network representation via a third-hand tool from (parts of) the output. The third-hand tool could be Cytoscape.
+
+\subsection*{Details}
+In this project we are only interested in human genes. The taxonomy ID (tax\_id) is 9606 for Homo Sapiens and you can use that directly in the program, IF you can explain how you found the number.
+The information that the program is supposed to create/mine can be considered to be a graph, where the nodes are genes, and the edges between nodes are links between the genes. Two genes are linked if they are mentioned/connected to the same article. The weight of the edge is the number of articles, which connects to both genes. The greater the weight of the edge, the more important is the relationship of the genes. The data in gene2pubmed is basically a connection between one gene and one PubMed article on each line. From that information you can generate the graph.
+How to determine the importance of the network? There are several yardsticks that springs to mind: 1) Number of nodes (many genes), 2) Sum of the edges (many co-mentioning articles), 3) Edge-sum/Nodes (high importance of the network).
+Some nodes in the graph do not have any connecting edges, these are uninteresting. Networks that consists of only few nodes where the connecting edges have low weights, are also uninteresting.

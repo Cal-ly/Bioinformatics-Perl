@@ -1,0 +1,426 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Lesson 2: Perl basics 1, Answers</title>
+</head>
+<body bgcolor="#B1AFCD" link="#0000FF">
+
+<center>
+<h1>
+<br>
+<font face="ARIAL,HELVETICA">Lesson 2: Perl basics 1, Answers 
+</font></h1>
+</center>
+
+<hr>
+<table width="80%" align=center>
+<tr><td>
+<b>Exercise 1</b><br>
+<pre>
+print "Hello World\n";
+</pre>
+<hr>
+
+<b>Exercise 2</b><br>
+<pre>
+$i = 1;
+while ($i &lt;= 10) {
+   print "Hello World\n";
+   $i++;
+}
+</pre>
+<hr>
+
+<b>Exercise 3</b><br>
+This simple exercise (and the one before) can be done in several correct,
+but bad ways, which will be shown here.
+<pre>
+$i = 1;
+while ($i &lt; 11) {
+   print "$i\n";
+   $i++;
+}
+
+$i = 0;
+while ($i &lt; 10) {
+   $i++;
+   print "$i\n";
+}
+
+for ($i = 0; $i &lt; 10; $i++;) {
+   print $i+1, "\n";
+}
+</pre>
+The good ways.
+<pre>
+$i = 1;
+while ($i &lt;= 10) {
+   print "$i\n";
+   $i++;
+}
+
+for ($i = 1; $i &lt;= 10; $i++;) {
+   print "$i\n";
+}
+</pre>
+What we want to do is to count from 1 to 10. By mentioning both numbers in
+the code like in the last examples you document your intentions clearly,
+making the code easier to read and understand for you, me and everybody else.
+Maintenance becomes easier. This is a simple example of one of the principles
+in writing good code.<br>
+Another principle is in play: When you enter the loop then you have passed a
+condition ($i &lt;= 10). That condition should be true all the way through the
+body of the loop, where the work is being done (print in this case). In the end
+of the body you change the counting variable thereby making ready for the next
+round in the loop, testing in the condition if you should go another round.<br>
+Following this makes for good solid code.
+<hr>
+
+<b>Exercise 4</b><br>
+There are several fine way to solve this. Here is a simple solution.
+<pre>
+print "Please enter your name: ";
+$name = &lt;STDIN&gt;;
+chomp $name;
+print "Welcome to my world, $name\n";
+if ($name eq 'Peter') {
+   print "It is so good to see you again.\n";
+}
+</pre>
+<hr>
+
+<b>Exercise 5</b><br>
+<pre>
+print "Please enter a number: ";
+$first = &lt;STDIN&gt;;
+chomp $first;
+print "Please enter another number: ";
+$second = &lt;STDIN&gt;;
+chomp $second;
+$sum = $first + $second;
+print "$first + $second = $sum\n";
+</pre>
+<hr>
+
+<b>Exercise 6</b><br>
+First I present a correct, but still insufficient solution, as
+the error handling is non-existant.
+<pre>
+print "Please enter a number: ";
+$first = &lt;STDIN&gt;;
+chomp $first;
+print "Please enter another number: ";
+$second = &lt;STDIN&gt;;
+chomp $second;
+print "Please enter the operation you wish to perform (+,-,*,/): ";
+$operation = &lt;STDIN&gt;;
+chomp $operation;
+if ($operation eq '+') {
+   $result = $first + $second;
+}
+if ($operation eq '-') {
+   $result = $first - $second;
+}
+if ($operation eq '*') {
+   $result = $first * $second;
+}
+if ($operation eq '/') {
+   $result = $first / $second;
+}
+print "$first $operation $second = $result\n";
+</pre>
+I have now introduced error handling. When programming you also need to
+look for what can go wrong (requires good imagination), not just what
+you need to achieve. The above solution would not react correctly if I
+entered a wrong operator like %. Also if I choose to enter 0 as my second
+number and / as the operator, I would produce a division-by-zero error.
+Not really stellar programming :-)<br>
+Generally, one should always consider if a division-by-zero error is possible
+whenever division is used.
+<pre>
+print "Please enter a number: ";
+$first = &lt;STDIN&gt;;
+chomp $first;
+print "Please enter another number: ";
+$second = &lt;STDIN&gt;;
+chomp $second;
+print "Please enter the operation you wish to perform (+,-,*,/): ";
+$operation = &lt;STDIN&gt;;
+chomp $operation;
+if ($operation eq '+') {
+   $result = $first + $second;
+} elsif ($operation eq '-') {
+   $result = $first - $second;
+} elsif ($operation eq '*') {
+   $result = $first * $second;
+} elsif ($operation eq '/') {
+   if ($second == 0) {
+      $result = 'Infinity (division by zero)'; 
+   } else {
+      $result = $first / $second;
+   }
+} else {
+   print "Error, you did not enter a legal operation.\n";
+   exit; # Having encountered an error, we stop executing.
+         # This is not great or elegant, but better than continuing.
+}
+print "$first $operation $second = $result\n";
+</pre>
+<hr>
+
+<b>Exercise 7</b><br>
+<pre>
+print "Please enter a number: ";
+$low = &lt;STDIN&gt;;
+chomp $low;
+print "Please enter another higher number: ";
+$high = &lt;STDIN&gt;;
+chomp $high;
+$i = $low;
+while ($i <= $high) {
+   print "$i\n";
+   $i++;
+}
+</pre>
+<hr>
+
+<b>Exercise 8</b><br>
+A common solution, here you have two loops, one for the case where
+the first number is higher than the second number, and one for the
+opposite situation.
+<pre>
+print "Please enter a number: ";
+$low = &lt;STDIN&gt;;
+chomp $low;
+print "Please enter another number: ";
+$high = &lt;STDIN&gt;;
+chomp $high;
+if ($low &lt; $high) {
+   for($i = $low; $i &lt;= $high; $i++) {
+      print "$i\n";
+   }
+} else {
+   for($i = $high; $i &lt;= $low; $i++) {
+      print "$i\n";
+   }
+}
+</pre>
+When you deal with data/input that is chaotic/unsystematic in nature,
+then a VERY good principle is to read the input first, then put it into some
+kind of order/system/structure. After that is is much simpler to perform
+whatever calculations you need to do, because you get rid of many of the
+special cases and you know exactly how the data looks, because you have made
+it that way yourself. When you have special cases then the code gets
+complicated, harder to read and maintain.<br>
+In this situation, all you have to do is put the numbers in the right order
+(low first) if they are in the wrong order. Just to be clear; this is the
+superior solution.
+<pre>
+print "Please enter a number: ";
+$low = &lt;STDIN&gt;;
+chomp $low;
+print "Please enter another number: ";
+$high = &lt;STDIN&gt;;
+chomp $high;
+if ($low &gt; $high) {
+   $tmp = $low;
+   $low = $high;
+   $high = $tmp;
+}
+$i = $low;
+while ($i &lt;= $high) {
+   print "$i\n";
+   $i++;
+}
+</pre>
+<hr>
+<b>Exercise 9</b><br>
+A very condensed and optimized solution.
+<pre>
+# Get the initial number
+print "Please, enter a number: ";
+$number = &lt;STDIN&gt;;
+chomp $number;
+# Ask for new numbers repeatedly
+$newnumber = $number;
+while ($newnumber &gt;= $number) {
+   $number = $newnumber;
+   print "Enter another number: ";
+   $newnumber = &lt;STDIN&gt;;
+   chomp $newnumber;
+}
+print "You finally entered a number less than any previous number\n";
+</pre>
+The loop can be structured differently. The condition can be placed
+in the end of the loop instead of the beginning. This can sometimes
+be an advantage, but not really in this case.
+<pre>
+# Get the initial number
+print "Please, enter a number: ";
+$number = &lt;STDIN&gt;;
+chomp $number;
+# Ask for new numbers repeatedly
+$newnumber = $number;
+do {
+   $number = $newnumber;
+   print "Enter another number: ";
+   $newnumber = &lt;STDIN&gt;;
+   chomp $newnumber;
+} while ($newnumber &gt;= $number);
+print "You finally entered a number less than any previous number\n";
+</pre>
+<hr>
+<b>Exercise 10</b><br>
+Please note that according to the exercise, it is not required to handle 0.
+<pre>
+print "Please enter a positive integer: ";
+$number = &lt;STDIN&gt;;
+chomp $number;
+if ($number &gt; 0) {
+   $factorial = 1; # 1 is identity for multiplication
+   $i = $number;
+   while ($i &gt; 0) {
+      $factorial *= $i;
+      $i--;
+   }
+   print "Factorial ($number!) of $number is $factorial\n";
+} else {
+   print "You did not enter a positive integer, stupid\n";
+}
+</pre>
+But it can be done painlessly anyway. It is also possible to optimize
+one turn of the loop away, since you do not need to multiply by 1.<br>
+Caution: By definition, 0! is 1. This should be known - at least if you try to
+handle 0.
+<pre>
+print "Please enter a positive integer: ";
+$number = &lt;STDIN&gt;;
+chomp $number;
+if ($number &gt;= 0) {
+   $factorial = 1; # 1 is identity for multiplication
+   for ($i = $number; $i &gt; 1; $i--) {
+      $factorial *= $i;
+   }
+   print "Factorial ($number!) of $number is $factorial\n";
+} else {
+   print "You entered a negative integer, stupid\n";
+}
+</pre>
+You can even check if the user enters letters instead of digits.
+<pre>
+print "Please enter a positive integer: ";
+$number = &lt;STDIN&gt;;
+chomp $number;
+if ($number == 0 and $number ne '0') {
+   print "Only numbers allowed\n";
+} elsif ($number &gt;= 0) {
+   $factorial = 1; # 1 is identity for multiplication
+   for ($i = $number; $i &gt; 1; $i--) {
+      $factorial *= $i;
+   }
+   print "Factorial ($number!) of $number is $factorial\n";
+} else {
+   print "You entered a negative integer, stupid\n";
+}
+</pre>
+ 
+<hr>
+
+<b>Exercise 11</b><br>
+The naive approach is to split it up in two cases.
+<pre>
+print "Please enter an integer: ";
+$number = &lt;STDIN&gt;;
+chomp $number;
+$sum = 0;
+if ($number &gt;= 0) {
+   for ($i = 1; $i &lt;= $number; $i++) {
+      $sum += $i;
+   }
+} else {
+   for ($i = $number; $i &lt; 0; $i++) {
+      $sum += $i;
+   }
+}
+print "The summing of $sign$number to 0 is $sign$sum\n";
+</pre>
+The guiding principle should be not to make special cases out of everything,
+but rather make generalized code. First have a bit of code in the beginning
+that systemizes everything, and once you have a system in your data, make 
+the computational part. Similar to 8.
+<pre>
+print "Please enter an integer: ";
+$number = &lt;STDIN&gt;;
+chomp $number;
+$sign = '';
+if ($number &lt; 0) {
+   $sign = '-';
+   $number = -$number;
+}
+$i = $number;
+$sum = 0; # 0 is identity for addition
+while ($i &gt; 0) {
+   $sum += $i;
+   $i--;
+}
+print "The summing of $sign$number to 0 is $sign$sum\n";
+</pre>
+A different, but equally good way to handle the problem is this.
+<pre>
+print "Please enter an integer: ";
+$number = &lt;STDIN&gt;;
+chomp $number;
+if ($number &lt; 0) {
+   $high = -1;
+   $low = $number;
+} else {
+   $high = $number;
+   $low = 1;
+}
+$sum = 0; # 0 is identity for addition
+for ($i = $low; $i &lt;= $high; $i++) {
+   $sum += $i;
+}
+print "The summing of $number to 0 is $sum\n";
+</pre>
+A rather elegant solution. There is no performance loss; the
+<b>if</b> in other solutions is replaced with a failed loop.
+<pre>
+print "Please enter an integer: ";
+$number = &lt;STDIN&gt;;
+chomp $number;
+$sum = 0; # 0 is identity for addition
+for ($i = $number; $i &gt; 0; $i--) {
+   $sum += $i;
+}
+for ($i = $number; $i &lt; 0; $i++) {
+   $sum += $i;
+}
+print "The summing of $number to 0 is $sum\n";
+</pre>
+Letting the sign of the number decide which way to count.
+<pre>
+print "Please enter an integer: ";
+$number = &lt;STDIN&gt;;
+chomp $number;
+$sum = 0; # 0 is identity for addition
+$step = $number &lt; 0 ? 1 : -1;
+for ($i = $number; $i != 0; $i += $step) {
+   $sum += $i;
+}
+print "The summing of $number to 0 is $sum\n";
+</pre>
+Because this is an arithmetic progression one could use the formula.
+That is so smart that it is almost cheating.
+<pre>
+print "Please enter an integer: ";
+$no = &lt;STDIN&gt;;
+chomp $no;
+$sum = $no &lt; 0 ? -$no*($no-1)/2 : $no*($no+1)/2;
+print "The summing of $no to 0 is $sum\n";
+</pre>
+</td></tr></table>
+
+</body>
+</html>

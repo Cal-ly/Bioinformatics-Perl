@@ -1,0 +1,26 @@
+9606	100874439	HMGN1P13	-	-	HGNC:39357	5	-	high mobility group nucleosome binding domain 1 pseudogene 13	pseudo	HMGN1P13	high mobility group nucleosome binding domain 1 pseudogene 13	O	-	20130215
+9606	100874440	HMGN1P14	-	-	HGNC:39358	5	-	high mobility group nucleosome binding domain 1 pseudogene 14	pseudo	HMGN1P14	high mobility group nucleosome binding domain 1 pseudogene 14	O	-	20130215
+9606	100874441	HMGN1P15	-	-	HGNC:39359	5	-	high mobility group nucleosome binding domain 1 pseudogene 15	pseudo	HMGN1P15	high mobility group nucleosome binding domain 1 pseudogene 15	O	-	20130215
+9606	100874442	HMGN1P16	-	-	HGNC:39360	5	-	high mobility group nucleosome binding domain 1 pseudogene 16	pseudo	HMGN1P16	high mobility group nucleosome binding domain 1 pseudogene 16	O	-	20130215
+9606	100874443	HMGN1P17	-	-	HGNC:39361	5	-	high mobility group nucleosome binding domain 1 pseudogene 17	pseudo	HMGN1P17	high mobility group nucleosome binding domain 1 pseudogene 17	O	-	20130215
+9606	100874444	HMGN1P18	-	-	HGNC:39362	7	-	high mobility group nucleosome binding domain 1 pseudogene 18	pseudo	HMGN1P18	high mobility group nucleosome binding domain 1 pseudogene 18	O	-	20130215
+9606	100874445	HMGN1P19	-	-	HGNC:39363	7	-	high mobility group nucleosome binding domain 1 pseudogene 19	pseudo	HMGN1P19	high mobility group nucleosome binding domain 1 pseudogene 19	O	-	20130215
+9606	100874446	HMGN1P33	-	-	HGNC:39377	X	-	high mobility group nucleosome binding domain 1 pseudogene 33	pseudo	HMGN1P33	high mobility group nucleosome binding domain 1 pseudogene 33	O	-	20130215
+9606	100874447	HMGN1P34	-	-	HGNC:39378	X	-	high mobility group nucleosome binding domain 1 pseudogene 34	pseudo	HMGN1P34	high mobility group nucleosome binding domain 1 pseudogene 34	O	-	20130215
+9606	100874448	HMGN1P35	-	-	HGNC:39379	X	-	high mobility group nucleosome binding domain 1 pseudogene 35	pseudo	HMGN1P35	high mobility group nucleosome binding domain 1 pseudogene 35	O	-	20130215
+9606	100874449	ARL2BPP10	-	-	HGNC:39454	22	-	ADP-ribosylation factor-like 2 binding protein pseudogene 10	pseudo	ARL2BPP10	ADP-ribosylation factor-like 2 binding protein pseudogene 10	O	-	20130215
+9606	100874450	HIGD1AP2	-	-	HGNC:42642	13	-	HIG1 hypoxia inducible domain family, member 1A pseudogene 2	pseudo	HIGD1AP2	HIG1 hypoxia inducible domain family, member 1A pseudogene 2	O	-	20130215
+9606	100874451	HIGD1AP8	-	-	HGNC:43003	12	-	HIG1 hypoxia inducible domain family, member 1A pseudogene 8	pseudo	HIGD1AP8	HIG1 hypoxia inducible domain family, member 1A pseudogene 8	O	-	20130215
+9606	100874452	HIGD1AP9	-	-	HGNC:43004	12	-	HIG1 hypoxia inducible domain family, member 1A pseudogene 9	pseudo	HIGD1AP9	HIG1 hypoxia inducible domain family, member 1A pseudogene 9	O	-	20130321
+9606	100874453	HIGD1AP11	-	-	HGNC:43006	1	-	HIG1 hypoxia inducible domain family, member 1A pseudogene 11	pseudo	HIGD1AP11	HIG1 hypoxia inducible domain family, member 1A pseudogene 11	O	-	20130215
+9606	100874454	HIGD1AP13	-	-	HGNC:43008	4	-	HIG1 hypoxia inducible domain family, member 1A pseudogene 13	pseudo	HIGD1AP13	HIG1 hypoxia inducible domain family, member 1A pseudogene 13	O	-	20130215
+9606	100874455	HIGD1AP14	-	-	HGNC:43009	4	-	HIG1 hypoxia inducible domain family, member 1A pseudogene 14	pseudo	HIGD1AP14	HIG1 hypoxia inducible domain family, member 1A pseudogene 14	O	-	20130215
+9606	100874456	HIGD1AP18	-	-	HGNC:43013	8	-	HIG1 hypoxia inducible domain family, member 1A pseudogene 18	pseudo	HIGD1AP18	HIG1 hypoxia inducible domain family, member 1A pseudogene 18	O	-	20130215
+9606	100874457	CASP1P1	-	-	HGNC:43775	11	-	caspase 1, apoptosis-related cysteine peptidase pseudogene 1	pseudo	CASP1P1	caspase 1, apoptosis-related cysteine peptidase pseudogene 1	O	-	20130215
+9606	100874458	HMGN2P14	-	-	HGNC:23341	14	-	high mobility group nucleosomal binding domain 2 pseudogene14	pseudo	HMGN2P14	high mobility group nucleosomal binding domain 2 pseudogene14	O	-	20130215
+9606	100874459	HMGN1P20	-	-	HGNC:39364	10	-	high mobility group nucleosome binding domain 1 pseudogene 20	pseudo	HMGN1P20	high mobility group nucleosome binding domain 1 pseudogene 20	O	-	20130215
+9606	100874460	HMGN1P22	-	-	HGNC:39366	11	-	high mobility group nucleosome binding domain 1 pseudogene 22	pseudo	HMGN1P22	high mobility group nucleosome binding domain 1 pseudogene 22	O	-	20130215
+9606	100874461	HMGN1P23	-	-	HGNC:39367	12	-	high mobility group nucleosome binding domain 1 pseudogene 23	pseudo	HMGN1P23	high mobility group nucleosome binding domain 1 pseudogene 23	O	-	20130215
+9606	100874462	HMGN1P24	-	-	HGNC:39368	13	-	high mobility group nucleosome binding domain 1 pseudogene 24	pseudo	HMGN1P24	high mobility group nucleosome binding domain 1 pseudogene 24	O	-	20130215
+9606	100874463	HMGN1P27	-	-	HGNC:39371	15	-	high mobility group nucleosome binding domain 1 pseudogene 27	pseudo	HMGN1P27	high mobility group nucleosome binding domain 1 pseudogene 27	O	-	20130215
+9606	100874464	HMGN1P28	-	-	HGNC:39372	17	-	high mobility group nucleosome binding domain 1 pseudogene 28	pseudo	HMGN1P28	high mobility group nucleosome binding domain 1 pseudogene 28	O	-	20130215

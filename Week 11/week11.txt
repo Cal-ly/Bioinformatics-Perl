@@ -1,0 +1,19 @@
+All the following exercises have to be done in Perl
+
+Make a program that calculates the product of two matrices and prints it on STDOUT (the screen). The matrices are in the files mat1.dat and mat2.dat. Numbers in the files are tab separated. A matrix should be stored as an array of arrays.
+Advice: The program should have a subroutine that reads a matrix from a given file (to be used twice), a subroutine that calculates the product, and a sub that prints a matrix. This way ensures that your program is easy to change to other forms of matrix calculations. Here are two links to the definition of matrix multiplication.
+http://www.mai.liu.se/~halun/matrix/matrix.html
+http://mathworld.wolfram.com/MatrixMultiplication.html
+
+
+
+In the file test1.dat is results from an experiment in the form
+AccessionNumber   Number Number Number ....
+.
+.
+In the files test2.dat and test3.dat are results from similar experiments but with a slightly different gene set. You want to average the numbers from all experiments for each acccession number. The output this therefore.
+AccessionNumber SingleAverageNumberOfAll3Experiments
+.
+.
+Of course it might happen that a certain gene is only in one or two experiments and in that case you calculate the average for those. You must use a one of complex data structures to store this data (AoA, AoH, HoA, HoH), preferably a hash of arrays.
+OPTIONAL: If you have time and inclination, then you can also solve this using simple structures.

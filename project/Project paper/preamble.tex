@@ -1,0 +1,243 @@
+\documentclass[11pt,a4paper,twoside]{memoir}
+
+
+%\maxtocdepth{subsubsection} % sætter toc-level-dybte til subsection
+%\maxtocdepth{subsection} % sætter toc-level-dybte til subsection
+
+\setsecnumdepth{subsection} % Sætter section-nummerering-niveau
+
+
+% Sprogpakker
+\usepackage[english]{babel} % Sæt til det brugte sprog.
+\usepackage[T1]{fontenc} % ?
+\usepackage[latin1]{inputenc} % Pakke til europæiske sprog
+\usepackage{lmodern} % Bedre symboler for æ ø å
+
+
+% Symbolpakker
+\usepackage{gensymb}	% Nødvendig for at lave gradtegn på vinkler.
+
+
+% Layout-pakker
+\makeheadrule{headings}{\textwidth}{\normalrulethickness} % Laver headrule i headings-pagestyle (standard-pagestyle'n i Memoir)
+\usepackage[vmargin=3cm]{geometry} % Layout - instilling af margener. Eksempel: [hmargin=2cm,vmargin=3cm]
+%\usepackage{parskip} % Paragraph - first line indent removal.
+%\usepackage{lastpage} % Giver mulighed for at hente nummeret på den sidste side.
+\usepackage{color} % Pakke til bl.a. farvet tekst og tekst med baggrund. Nødvendig til MatLab-input.
+%\usepackage{xcolor} % Anbefalet af DTU-LaTeX-support. Nødvendig?
+%\usepackage[para,bottom]{footmisc} % Customizing the footer. Options: para: writes footnotes on a single line. Bottom: detaches the footnotes from the text and place them at the bottom of the page.
+\raggedbottom % Sørger for, at linierne ikke bliver spredt ud for at dække hele siden.
+
+\setlength{\footmarkwidth}{0em} 	% Formatting footnotes % Flush left
+\setlength{\footmarksep}{0em}		% Formatting footnotes % Block paragraph
+
+
+
+
+
+% PDF-pakker
+\usepackage{pdfsync} % Pakke til sync med SumatraPDF
+\usepackage{pdfpages} % Pakke til PDF-import
+\includepdfset{pages=-,pagecommand={\thispagestyle{headings}}}	% Sets the general options for all included pdf's
+
+
+
+% Pakker til figurer
+\usepackage{graphicx} % Pakke til brug af figurer.
+\graphicspath{{./gfx/}} % Stig til figurer.
+\usepackage{float} % Giver bl.a. bedre muligheder for placering af floats.
+%\usepackage{subfigure} % Memoir er ikke glad for denne pakke.
+%\usepackage[]{caption} % font=small,labelfont=bf. Memoir er ikke glad for denne pakke.
+\usepackage[caption=false]{subfig} % Nyere version af subfigure-pakken. [caption=false] slukker for caption-pakken, som loades af subfig.
+\usepackage{epstopdf} % Nødvendig til import af .eps-filer. Opdaterer selv pdf'erne, når eps'en er redigeret.
+\usepackage[figuresright]{rotating} % Muliggør "sidewaystable". "figuresright" gør, at venstre side af figur/table er i bunden af siden.
+
+% Pakker til tabeller
+\usepackage{booktabs}
+\usepackage{multirow}
+
+%Pakke til progammmering sprog
+\usepackage{listings}
+
+%Pakke til text filer
+\usepackage{verbatim}
+
+% Matematik-pakker
+\usepackage{mathtools} % Bedre inline-math ( $ $ )
+\usepackage{amsmath} % 
+\usepackage{bm} % Muligør "fede" græske symboler.
+\usepackage{siunitx} % Pakke til afrunding af tal og units generelt.
+
+\sisetup{					% Setup for the siunitx-package (see documentation p. 17)
+	%	fixed-exponent=3,
+	round-precision=4,
+	round-mode=figures,
+	scientific-notation = engineering,
+	per-mode=fraction
+}%
+
+
+
+% Reference-pakker
+\usepackage{nameref} % Mulighed for titler på sections og chapters ved referencer.
+\usepackage{varioref} % Pakke til udvidede referencer (autotekst i referencer - på engelsk). Muliggør brug af \labelformat
+%\usepackage{makeidx} % Til indeksering
+%\usepackage{showidx} % Shows indexed words in the margin next to where they have been defined. Doesn't work in Memoir
+%\makeindex
+\usepackage[bibstyle=numeric,citestyle=authoryear,backend=bibtex8]{biblatex} % Bedre bibliography.
+\bibliography{./formalia/references} % Sti til .bib-fil (.bib-filer kan med fordel oprettes og administreres med JabRef)
+\labelformat{equation}{\textup{(#1)}}
+
+
+% Nomenclature-pakker
+\usepackage[intoc]{nomencl} % Pakke til at lave nomenclature, intoc puts nomenclature in the toc
+\makenomenclature
+%\setlength{\nomitemsep}{-\parsep} % Removes extra skip between lines in nomenclature
+\usepackage{multicol} % Multiple columns environment
+\renewcommand*\nompreamble{Symbol \hspace*{1.7ex}	Unit \hspace*{1.7em}	Description\\[-13pt]	\hrule}
+
+
+
+% Appendix-pakker
+%\usepackage[]{appendix} % Lækre appendikser. Memoir kan ikke lide options: toc,page,title,titletoc,header
+%\noappendicestocpagenum % Fjerner sidenummer fra TOC
+\usepackage{etoolbox} % Needed for custom numbering
+
+\usepackage{hyperref} % Referencer virker nu som links.
+
+% Reference custemization
+\hypersetup{				% http://en.wikibooks.org/wiki/LaTeX/Hyperlinks
+%    bookmarks=true,         % show bookmarks bar?
+    unicode=false,          % non-Latin characters in Acrobat's bookmarks
+    pdftoolbar=true,        % show Acrobat's toolbar?
+    pdfmenubar=true,        % show Acrobat's menu?
+    pdffitwindow=true,     % window fit to page when opened
+    pdfstartview={FitH},    % fits the width of the page to the window
+    pdftitle={Buckling and Torsion of Columns},									% title
+    pdfauthor={Kristian Kipp Lauesen, s093555 \& Morten Mengel Kaastrup, s093514},			% author
+    pdfsubject={Strength of materials},											% subject of the document
+    pdfcreator={KKL \& MMK},				% creator of the document
+    pdfproducer={TeXmakerX, MikTeX},							% producer of the document
+    pdfkeywords={ANSYS} {plastic deformation} {slit tubes} {buckling} {torsion},	% list of keywords
+    pdfnewwindow=true,      % links in new window
+    colorlinks=false,     	% false: boxed links; true: colored links
+    citecolor=green,		% color of links to bibliography
+    filecolor=magenta,		% color of file links
+    linkcolor=blue,			% color of internal links
+    urlcolor=red			% color of external links
+}
+
+
+
+% INCLUDE MATLAB CODE SETTINGS:
+\usepackage{listings}
+\usepackage{textcomp}
+\definecolor{listinggray}{gray}{0.9}
+\definecolor{lbcolor}{rgb}{0.9,0.9,0.9}
+\lstset{
+	backgroundcolor=\color{lbcolor},
+	tabsize=4,
+	rulecolor=,
+	language=fortran,
+        basicstyle=\tiny,
+        upquote=true,
+        aboveskip={1.5\baselineskip},
+        columns=fixed,
+        showstringspaces=false,
+        extendedchars=true,
+        breaklines=true,
+        prebreak = \raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},
+        frame=single,
+        showtabs=false,
+        showspaces=false,
+        showstringspaces=false,
+        identifierstyle=\ttfamily,
+        keywordstyle=\color[rgb]{0,0,1},
+        commentstyle=\color[rgb]{0.133,0.545,0.133},
+        stringstyle=\color[rgb]{0.627,0.126,0.941},
+}%
+\usepackage{memhfixc} % fixes for hyperref
+
+
+
+%\usepackage{ amssymb } % Bruges til ekstra matematiksymboler. fx "\blacksquare"
+%\usepackage{titlesec} % Tillader ændringer i chapter headings.
+%\titleformat{\chapter}[hang]{\Huge\bfseries}{\hspace{-20pt}$ \blacksquare $\hspace{20pt}\thechapter\hspace{20pt}|\hspace{20pt}}{0pt}{\Huge\bfseries}
+
+
+% New commands
+
+% Modifying \autoref
+% \autoref is used to produce Figure and Eq. for figures, subfigures, and equations
+\let\orgautoref\autoref
+\renewcommand{\autoref}[1]{%
+	\def\equationautorefname{Eq.}%
+	\def\figureautorefname{Figure}%
+	\def\subfigureautorefname{Figure}%
+	\def\tableautorefname{Table}%
+	\def\chapterautorefname{Chapter} %
+	\def\sectionautorefname{Section} %
+	\orgautoref{#1}%
+}
+
+
+% Modifying \textcite and \parencite for the whole cite to be clickable
+\DeclareCiteCommand{\textcite}
+{\boolfalse{cbx:parens}}
+{\usebibmacro{citeindex}%
+	\printtext[bibhyperref]{\usebibmacro{textcite}}}
+	{\ifbool{cbx:parens}
+		{\bibcloseparen\global\boolfalse{cbx:parens}}
+		{}%
+		\multicitedelim}
+		{\usebibmacro{textcite:postnote}}
+
+\DeclareCiteCommand{\parencite}[\mkbibparens]
+{\usebibmacro{prenote}}
+{\usebibmacro{citeindex}%
+	\printtext[bibhyperref]{\usebibmacro{cite}}}
+	{\multicitedelim}
+	{\usebibmacro{postnote}}
+
+\DeclareCiteCommand*{\parencite}[\mkbibparens]
+{\usebibmacro{prenote}}
+{\usebibmacro{citeindex}%
+	\printtext[bibhyperref]{\usebibmacro{citeyear}}}
+	{\multicitedelim}
+	{\usebibmacro{postnote}}
+
+
+
+
+
+%\newif\ifformalia		% Laver en if-statement, som kan kaldes.
+%\formaliafalse % \formaliatrue -> ``tænder'' for formalia. \formaliafalse -> ``slukker'' for formalia.
+
+
+\newcommand{\nomsi}[1]{%		% Boks til enheder i nomenklaturen
+	\makebox[2cm][c]{\si{#1}}
+}
+
+
+
+\newcommand{\AppendixNumbering}{ % Custom numbering.
+	\pretocmd{\chapter}{%
+		\cleardoublepage
+		\pagenumbering{arabic} % resets `page` counter to 1
+		\renewcommand*{\thepage}{\thechapter.\arabic{page}}  % Custom page numbering. Chapter specific.
+	}
+}
+
+\newcommand{\namerefit}[1]{\textit{\nameref{#1}}} % Italic nameref
+
+\newcommand{\ansys}{\textit{ANSYS/LS-DYNA}}
+
+\newcommand{\ansysSTANDARD}{\textit{ANSYS/STANDARD}}
+
+\newcommand{\matlab}{\textit{MATLAB}}
+
+\newcommand{\PowerLawPlasticityModel}{\textit{Power law plasticity model}}
+
+\newcommand{\shell}{\texttt{SHELL163}}
+
+

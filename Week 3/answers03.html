@@ -1,0 +1,344 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Lesson 3: Perl basics 2, Answers</title>
+</head>
+<body bgcolor="#B1AFCD" link="#0000FF">
+
+<center>
+<h1>
+<br>
+<font face="ARIAL,HELVETICA">Lesson 3: Perl basics 2, Answers
+</font></h1>
+</center>
+<hr>
+<table width="80%" align=center>
+<tr><td>
+<b>Exercise 1</b><br>
+<pre>
+# First ask for numbers
+print "Enter an integer: ";
+$low = &lt;STDIN&gt;;
+$chomp $low;
+print "Enter another integer: ";
+$high = &lt;STDIN&gt;;
+$chomp $high;
+# method 1, standard way
+$middle = int(($low + $high)/2);
+# method 2, bitwise shift
+$middle = ($low + $high) &gt;&gt; 1;
+# method 3, not using int, but modulo
+if (($low + $high) % 2 == 0) {
+   $middle = ($low + $high)/2;
+} else {
+   $middle = ($low + $high - 1)/2;
+}
+# method 4, meeting in the middle
+# make sure that the lowest integer is in $low, etc.
+if ($low &gt; $high) {
+   $tmp = $low;
+   $low = $high;
+   $high = $tmp;
+}
+$l = $low;
+$h = $high;
+while ($l &lt; $h) {
+   $l++;
+   $h--;
+}
+$middle = $h;
+# now print middle
+print "The middle of $low and $high is $middle.\n";
+</pre>
+<hr>
+
+<b>Exercise 2</b><br>
+Using nedit to create a file called <i>numbers.lst</i> with this content:<br>
+3<br>
+7
+<pre>
+mean.pl &lt; number.lst
+</pre>
+<hr>
+
+<b>Exercise 3</b><br>
+<pre>
+# Initialise counting variable to 0
+$count = 0;
+$line = &lt;STDIN&gt;;
+while (defined $line) {
+   # Every time there is a line, count it
+   # There is no need to chomp since the line itself is not used
+   $count++;
+   $line = &lt;STDIN&gt;;
+}
+print "$count lines\n";
+</pre>
+A slightly smarter version might be
+<pre>
+$count = 0;
+while (defined ($line = &lt;STDIN&gt;)) {
+   $count++;
+}
+print "$count lines\n";
+</pre>
+"count.pl &lt; ex1.dat" or "cat ex1.dat | count.pl"
+<hr>
+
+<b>Exercise 4</b><br>
+File construction:
+<pre>
+cut -f 1 ex1.dat &gt; col1.dat
+cut -f 2 ex1.dat &gt; col2.dat
+cut -f 3 ex1.dat &gt; col3.dat
+</pre>
+Program:
+<pre>
+$sum = 0; # 0 is the identity for addition
+$line = &lt;STDIN&gt;;
+while (defined $line) {
+   chomp $line; # We chomp only when there is a line
+   $sum += $line;
+   $line = &lt;STDIN&gt;;
+}
+print "The sum is $sum\n";
+</pre>
+A version that handles empty files
+<pre>
+$line = &lt;STDIN&gt;;
+if (defined $line) {
+   $sum = $line;
+   chomp $sum;
+}
+while (defined ($line = &lt;STDIN&gt;)) {
+   chomp $line;
+   $sum += $line;
+}
+if (defined $sum) {
+   print "The sum is $sum\n";
+} else {
+   print "Error: Empty file\n";
+}
+</pre>
+<hr>
+
+<b>Exercise 5</b><br>
+The result of averaging 1-9 is 5.
+<pre>
+# When calculating an average, you need the sum and the count of the numbers
+$sum = 0;
+$count = 0;
+$line = &lt;STDIN&gt;;
+while (defined $line) {
+   chomp $line;
+   $sum += $line;
+   $count++;
+   $line = &lt;STDIN&gt;;
+}
+if ($count == 0) {
+   print "Error: Empty file\n";
+} else {
+   $mean = $sum/$count;
+   print "The mean is $mean\n";
+}
+</pre>
+Clever students may take into consideration what happens if there
+are no lines in the file (division-by-zero).
+<hr>
+
+<b>Exercise 6</b><br>
+In empty files there are no positive, negative or zeroes.
+<pre>
+$positive = 0;
+$negative = 0;
+$zero = 0;
+$line = &lt;STDIN&gt;;
+while (defined $line) {
+   chomp $line;
+   if ($line &lt; 0) {
+      $negative++;
+   } elsif ($line &gt; 0) {
+      $positive++;
+   } else {
+      $zero++;
+   }
+   $line = &lt;STDIN&gt;;
+}
+print "Positive numbers: $positive\n";
+print "Negative numbers: $negative\n";
+print "Zeroes: $zero\n";
+</pre>
+The enterprising student will have noticed that this code is
+insufficient, if there are lines in the file, which does not contain numbers.
+We will learn to deal with that later.
+
+<hr>
+<b>Exercise 7</b><br>
+This can be done in many different ways, that all have that
+in common that they look at all the numbers in the file.
+<pre>
+# Warning: The first value might be the maximum
+$line = &lt;STDIN&gt;;
+while (defined $line) {
+   chomp $line;
+   if (defined $max) {
+      if ($line &gt; $max) {
+         $max = $line;
+      }
+   } else {
+      $max = $line;
+   }
+   $line = &lt;STDIN&gt;;
+}
+print "The maximum is $max\n";
+</pre>
+This method has the advantage, that it is easy to extend to handle empty files.
+<pre>
+while (defined ($line = &lt;STDIN&gt;)) {
+   chomp $line;
+   unless (defined $max) {
+      $max = $line;
+   } elsif ($line &gt; $max) {
+         $max = $line;
+   }
+}
+if (defined $max) {
+   print "The maximum is $max\n";
+} else {
+   print "Error: empty file\n";
+}
+</pre>
+This can even be shorten down to this, using that fact that
+perl is applying short-circuit evaluation.
+<pre>
+while (defined ($line = &lt;STDIN&gt;)) {
+   chomp $line;
+   $max = $line unless defined $max and $line &lt; $max;
+}
+if (defined $max) {
+   print "The maximum is $max\n";
+} else {
+   print "Error: empty file\n";
+}
+</pre>
+<hr>
+
+<b>Exercise 8</b><br>
+<pre>
+while (defined ($line = &lt;STDIN&gt;)) {
+   chomp $line;
+   unless (defined $min) {
+      $min = $line;
+   } elsif ($line &lt; $min) {
+         $min = $line;
+   }
+}
+if (defined $min) {
+   print "The minimum is $min\n";
+} else {
+   print "Error: empty file\n";
+}
+</pre>
+<hr>
+<b>Exercise 9</b><br>
+<pre>
+# Initializing values
+$count = 0;
+$sum = 0;
+$positive = 0;
+$negative = 0;
+$zero = 0;
+# The loop
+while (defined ($line = &lt;STDIN&gt;)) {
+   chomp $line;
+   if ($line &lt; 0) {
+      $negative++;
+   } elsif ($line &gt; 0) {
+      $positive++;
+   } else {
+      $zero++;
+   }
+   if (defined $max) {
+      $min = $line if $line &lt; $min;
+      $max = $line if $line &gt; $max;
+   } else {
+      $min = $line;
+      $max = $line;
+   }
+   $sum += $line;
+   $count++;
+}
+# Displaying results
+if ($count == 0) {
+   print "Empty file\n";
+} else {
+   print "The sum of values: $sum\n";
+   print "Number of lines in file: $count\n";
+   print "The mean value: ", $sum/$count, "\n";
+   print "Positive numbers: $positive\n";
+   print "Negative numbers: $negative\n";
+   print "Zeroes: $zero\n";
+   print "Minimum value: $min\n";
+   print "Maximum value: $max\n";
+}
+</pre>
+
+<hr>
+<b>Exercise 10</b><br>
+F = (C * 9/5) + 32 
+<pre>
+print "Please, enter temperature in Celsius or Fahrenheit like '36F' or '15C': ";
+$temp = &lt;STDIN&gt;;
+chomp $temp;
+$type = chop $temp; # remove last char and put it into type
+$type = uc($type); # uppercase type, not required, but nice
+if ($type eq 'F') {
+   print "$temp F is ", ($temp-32)*5/9, " C\n";
+} elsif ($type eq 'C') {
+   print "$temp C is ", $temp*9/5+32, " F\n";
+} else {
+   print "I do not understand\n";
+}
+</pre>
+
+<hr>
+<b>Exercise 11</b><br>
+I consider this the easiest way. It works by determining the position of the center
+and for each position in the grid calculating the distance to the center. The char
+placed at that position is then a function of the relative distance from the center.
+One should realize that the chars on the screen are not quadratic, but rectangular 
+(approx. twice as high as they are wide) and this will distort the circle.
+<pre>
+# Determine the size of the bullseye
+$cols = 40;
+$rows = 40;
+# Find center
+$x_center = int($rows/2);
+$y_center = int($cols/2);
+$longest_distance = sqrt($x_center*$x_center + $y_center*$y_center);
+
+# Step by 2 to offset the screen distortion
+for ($x = 0; $x &lt;= $rows; $x+=2) {
+   for ($y = 0; $y &lt;= $cols; $y++) {
+      $x_diff = $x - $x_center;
+      $y_diff = $y - $y_center;
+      $distance = sqrt($x_diff*$x_diff + $y_diff*$y_diff);
+      $percentage = $distance/$longest_distance;
+      $char = ' ';
+      $char = ':' if $percentage &lt; 0.7;
+      $char = '+' if $percentage &lt; 0.5;
+      $char = '&' if $percentage &lt; 0.3;
+      $char = '*' if $percentage &lt; 0.1;
+      $char = '#' if $percentage &lt; 0.01;
+      print $char;
+   }
+   print "\n";
+}
+</pre>
+
+
+</td></tr></table>
+
+</body>
+</html>

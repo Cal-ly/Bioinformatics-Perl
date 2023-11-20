@@ -1,0 +1,155 @@
+First I wish to go to my files in the directory "UNIX" made for this exercise,
+then list them
+-Command: cd UNIX
+-Command: ls
+Listing the files in the directory could have been done by just using the
+command "ls UNIX" but I want to work with the files in the directory.
+Then I copy the file "ex1.acc" to "myfile.acc"
+-Command: cp ex1.acc myfile.acc
+So the content should have been copied from "ex1.acc" to "myfile.acc"
+I use the command "nedit myfile.acc" to open "myfile.acc" in nedit to ensure the
+contents of "ex1.acc" have been duplicated.
+The i do the same with the "ex1.dat" file
+-Command: cp ex1.dat myfile.acc
+-Command: nedit myfile.acc
+The content has been changed, succes!
+It should be noted that xterm ask me everytime I want to overwrite a file, in
+such cases I type "y" and press enter.
+I then delete the file "myfile.acc"
+-Command: rm myfile.acc
+I will then make a directory called "test" and move the three files "ex1.acc",
+"ex1.dat" and "orphans.sp"
+-Command: mv ex1.acc test
+-Command: mv ex1.dat test
+-Command: mv orphans.sp test
+-Command: ls test
+The last command is to ensure I have moved the the files correctly
+Then I make the directory "data" and move the three files there instead, check
+the data folder and delete the "test" dir.
+-Command: mkdir data
+-Command: mv test/ex1.acc data
+-Command: mv test/ex1.dat data
+-Command: mv test/orphans.sp data
+-Command: ls data
+-Command: rmdir test
+Then I go to the "data" dir 
+-Command: cd data
+check again that I have succede in moving the files via the command "ls", then
+go one up to my home directory "UNIX"
+-Command: cd 
+OR 
+-Command: cd UNIX
+The last one is the safest way, in case I have multiple directories, the "cd"
+command just bumps you up one directory level
+I will then create three folders inside each other, all named "newtest"
+-Command: mkdir newtest
+-Command: mkdir newtest/newtest
+-Command: mkdir newtest/newtest/newtest
+And move the dir "data" to the innermost "newtest" dir
+-Command: mv data newtest/newtest/newtest
+Confirm that the "data" dir and the three files have been moved
+-Command: ls newtest/newtest/newtest/data
+The three files are there and I will copy them to the UNIX dir
+-Command: cp newtest/newtest/newtest/data/ex1.acc ~/UNIX
+-Command: cp newtest/newtest/newtest/data/ex1.dat ~/UNIX
+-Command: cp newtest/newtest/newtest/data/orphans.sp ~/UNIX
+Then I remove all the subdirectories and files in them, using the recusivly
+function (-r)
+-Command: rm -r newtest
+For the line count I use
+-Command: wc ex1.acc ex1.dat
+I get 1675 lines for both files
+To concatenate the two files into the new file "ex1.tot" and hereafter
+check the new file I use the following commands
+-Command: cat ex1.acc ex1.dat>ex1.tot
+-Command: nedit ex1.tot
+For pasting the two files togehter and make a parallel merging, and again
+check it is done correctly I use
+-Command: paste ex1.acc ex1.dat>ex1.tot
+for cutting out the data fields I want, I use the "cut" command
+-Command: cut -f 1,3,5 ex1.tot>ex1.res
+For cutting out the GenBank ID I redo what I did with the SwissProt
+-Command: cut -f 2,3 ex1.tot>ex1.res
+
+For finding the lines in the "orphans,sp" file I use the "grep" command and
+send the output (all line containing "CDS") into a new file called "genbank.sp" 
+on which I use the "wc" command to ensure there are 85 lines.
+-Command: grep CDS orphans.sp>genbank.sp
+-Command: wc genbank.sp
+I get 85 lines in the "genbank.sp" file.
+I don't want to count the number of lines myself, so I will pipeline all the
+results to a new file, and then use the "wc" command for a line count
+-Command: grep HUMAN orphans.sp>swiss.sp
+-Command: grep HYPOTHETICAL swiss.sp>hypo.sp
+-Command: wc hypo.sp
+I get a line count on 11 lines, corresponding to 11 hypothetical proteins. I
+could have used the command "grep -i human orphans.sp>swiss.sp" to ignore the
+if it was "HUMAN" or "human", but to keep it simple, I used the most simple
+command
+I do exactly the same with the SwissProt ID, for finding rat and precursor
+-Command: grep _RAT orphans.sp>rat.sp
+-Command: grep PRECURSOR rat.sp>precursor.sp
+-Command: wc precursor.sp
+I get nine lines of rat precursors.
+For extracting all the negativ numbers I know they all contain "-" and the
+positiv numbers does not contain "-", so for the positiv number I will use "-v"
+for invert match, all lines not containing what I specify.
+-Command: grep - ex1.res>ex1.neg
+-Command: grep -v - ex1.res>ex1.pos
+
+#Carsten Haislund Johansen
+#Course 27619 Perl and UNIX
+#8. feb 2013 - 1. semester week
+#Shell script for line 19-24
+
+#NOTE: Script is directory dependant, meaning the files will have to be in the 
+#home directory, otherwise it will not find the files
+
+#Exercise 19
+paste ex1.acc ex1.dat>ex1.tot
+echo exercise 19 done
+
+#Exercise 20
+cut -f 1,3,5 ex1.tot>ex1.res
+echo exercise 20 done
+
+#Exercise 21
+cut -f 2,3 ex1.tot>ex1.res
+echo ecxercise 21 done
+
+#Exercise 22
+grep CDS orphans.sp>genbank.sp
+wc genbank.sp
+rm genbank.sp
+echo exercise 22 done
+
+#Exercise 23
+grep -i human orphans.sp>swiss.sp
+grep -i hypothetical swiss.sp>hypo.sp
+wc hypo.sp
+rm swiss.sp hypo.sp
+grep -i _rat orphans.sp>rat.sp
+grep -i precursor rat.sp>precursor.sp
+wc precursor.sp
+rm rat.sp precursor.sp
+echo exercise 23 done
+
+#Exercise 24
+grep - ex1.res>ex1.neg
+grep -v - ex1.res>ex1.pos
+echo exercise 24 done
+
+
+NOTE: I could have used pipe "|" more, but for my own sake, I wanted to keep it 
+simple, because
+-Command: grep _RAT orphans.sp>rat.sp
+-Command: grep PRECURSOR rat.sp>precursor.sp
+looked better and more understandable than 
+-Command: grep _RAT orphans.sp|grep PRECURSOR|less
+
+
+
+
+
+
+

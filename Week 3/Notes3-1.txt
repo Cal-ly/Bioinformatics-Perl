@@ -1,0 +1,24 @@
+Monday the 18/02-2013
+
+"-w" in the pretext "!#/bin/usr/perl -w" the it wirtes error
+
+integer takes the integer int(5.45)=5 and int(5.96)=5
+with negative integers it take the integer int(-3.6)=3
+
+undef automatically acts like 0 when used as a number and as an empty string in
+a string context
+
+using the 'defined' e.g. 
+
+$line = <STDIN>;
+if (defined $line) {
+	print "$line";
+}
+else {
+	print "No input\n";
+}
+
+if the $line is defined, then it will print the variable $line, put if there is
+no input (e.g. an empty file).
+
+

@@ -1,0 +1,50 @@
+#Carsten Haislund Johansen s092981
+#Course 27619 Perl and UNIX for bioinformaticians
+#8. feb 2013
+#Exercise script for semester week 1
+
+#!/bin/bash
+
+date >ex1.neg2
+echo This is all the negative numbers from ex1.dat>>ex1.neg2
+#this adds date, time and my short description of the file
+
+cut -f 1 ex1.dat|grep - |cat >> ex1.neg2
+cut -f 2 ex1.dat|grep - |cat >> ex1.neg2
+cut -f 3 ex1.dat|grep - |cat >> ex1.neg2
+#first I cut a colume out, take out all negative numbers and put them into
+#the ex1.neg2 file. Repeated for all 3 columes.
+
+
+date >ex1.pos2
+echo This is all the positive numbers from ex1.dat>>ex1.pos2
+
+cut -f 1 ex1.dat|grep -v - |cat >> ex1.pos2
+cut -f 2 ex1.dat|grep -v - |cat >> ex1.pos2
+cut -f 3 ex1.dat|grep -v - |cat >> ex1.pos2
+#first I cut a colume out, take out all the "non-negative" numbers via "-v" and 
+#put them into the ex1.neg2 file. Repeated for all 3 columes.
+
+#The script above will create two files with one colume of negative numbers in
+#one file and positive numbers in the other file
+#The script below is maintain the 3 columes in two files ex1.neg3 and ex1.pos3
+
+date >ex1.neg3
+echo Three columes of negative numbers>>ex1.neg3
+
+cut -f 1 ex1.dat|grep - > tmp1
+cut -f 2 ex1.dat|grep - > tmp2
+cut -f 3 ex1.dat|grep - > tmp3
+paste tmp1 tmp2 tmp3 >>ex1.neg3
+
+date >ex1.pos3
+echo Three columes of positive numbers>>ex1.pos3
+
+cut -f 1 ex1.dat|grep -v - > tmp1
+cut -f 2 ex1.dat|grep -v - > tmp2
+cut -f 3 ex1.dat|grep -v - > tmp3
+paste tmp1 tmp2 tmp3 >>ex1.pos3
+
+rm tmp1 tmp2 tmp3
+#this script has the disadvantage that you have to press "y" to delete the three
+#tmp files, but delivers a more manageble view of the results

@@ -1,0 +1,12 @@
+So I have to feed my average program 'ex1.pl' with the input file
+'ex2input.txt'. to do so, I simply type the following in the prombt
+
+perl ex1.pl <ex2input.txt
+
+If I wanted the result saved to a file I just redirect the output to a new file
+
+perl ex1.pl <ex2input.txt >res.txt
+
+Notice that both files are in the same folder, and so will the newly created
+file 'res.txt' also be saved to. The output will also contain all the text
+that are written on screen.

@@ -1,0 +1,42 @@
+#Carsten Haislund Johansen
+#Course 27619 Perl and UNIX
+#8. feb 2013 - 1. semester week
+#Shell script for line 19-24
+
+#NOTE: Script is directory dependant, meaning the files will have to be in the 
+#home directory, otherwise it will not find the files
+
+#Exercise 19
+paste ex1.acc ex1.dat>ex1.tot
+echo exercise 19 done
+
+#Exercise 20
+cut -f 1,3,5 ex1.tot>ex1.res
+echo exercise 20 done
+
+#Exercise 21
+cut -f 2,3 ex1.tot>ex1.res
+echo ecxercise 21 done
+
+#Exercise 22
+grep CDS orphans.sp>genbank.sp
+wc genbank.sp
+rm genbank.sp
+echo exercise 22 done
+
+#Exercise 23
+grep -i human orphans.sp>swiss.sp
+grep -i hypothetical swiss.sp>hypo.sp
+wc hypo.sp
+rm swiss.sp hypo.sp
+grep -i _rat orphans.sp>rat.sp
+grep -i precursor rat.sp>precursor.sp
+wc precursor.sp
+rm rat.sp precursor.sp
+echo exercise 23 done
+
+#Exercise 24
+grep - ex1.res>ex1.neg
+grep -v - ex1.res>ex1.pos
+echo exercise 24 done
+
